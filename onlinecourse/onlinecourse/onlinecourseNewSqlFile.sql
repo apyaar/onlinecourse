@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 02:38 PM
+-- Generation Time: Apr 10, 2023 at 05:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `creationDate`, `updationDate`) VALUES
-(1, 'admin', '12345', '2022-01-31 16:21:18', '0000-00-00 00:00:00');
+(1, 'admin', '12345', '2022-01-31 16:21:18', '0000-00-00 00:00:00'),
+(2, 'AP', '121212', '2023-04-03 16:05:18', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -49,8 +50,7 @@ INSERT INTO `admin` (`id`, `username`, `password`, `creationDate`, `updationDate
 --
 
 CREATE TABLE `course` (
-  `id` int(11) NOT NULL,
-  `courseCode` varchar(255) DEFAULT NULL,
+  `course_code` varchar(255) NOT NULL,
   `courseName` varchar(255) DEFAULT NULL,
   `courseUnit` varchar(255) DEFAULT NULL,
   `noofSeats` int(11) DEFAULT NULL,
@@ -70,9 +70,9 @@ CREATE TABLE `course` (
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`id`, `courseCode`, `courseName`, `courseUnit`, `noofSeats`, `bucket_number`, `seats_for_MCA`, `seats_for_IMTECH_A`, `seats_for_IMTECH_B`, `seats_for_IMTECH_C`, `seats_for_MTECH_AI`, `seats_for_MTECH_CS`, `seats_for_MTECH_IT`, `creationDate`, `updationDate`) VALUES
-(1, 'PHP01', 'PHP', '5', 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-10 17:23:28', NULL),
-(2, 'C001', 'C++', '12', 25, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-11 00:52:46', '11-02-2022 06:23:06 AM');
+INSERT INTO `course` (`course_code`, `courseName`, `courseUnit`, `noofSeats`, `bucket_number`, `seats_for_MCA`, `seats_for_IMTECH_A`, `seats_for_IMTECH_B`, `seats_for_IMTECH_C`, `seats_for_MTECH_AI`, `seats_for_MTECH_CS`, `seats_for_MTECH_IT`, `creationDate`, `updationDate`) VALUES
+('C001', 'C++', '12', 25, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-11 00:52:46', '11-02-2022 06:23:06 AM'),
+('PHP01', 'PHP', '5', 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-10 17:23:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -110,9 +110,9 @@ INSERT INTO `courseenrolls` (`id`, `studentRegno`, `pincode`, `session`, `depart
 
 CREATE TABLE `courses_allocated` (
   `courses_allocated_id` int(11) NOT NULL,
-  `course_code` int(11) NOT NULL,
+  `course_code` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `course_name` varchar(50) NOT NULL,
-  `student_reg_no` int(11) NOT NULL
+  `student_reg_no` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -134,6 +134,36 @@ CREATE TABLE `department` (
 INSERT INTO `department` (`id`, `department`, `creationDate`) VALUES
 (1, 'IT', '2022-02-10 17:23:04'),
 (2, 'HR', '2022-02-10 17:23:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `elective_preference`
+--
+
+CREATE TABLE `elective_preference` (
+  `elective_preference_id` int(11) NOT NULL,
+  `student_reg_no` varchar(255) NOT NULL,
+  `E1` int(11) DEFAULT NULL,
+  `E2` int(11) DEFAULT NULL,
+  `E3` int(11) DEFAULT NULL,
+  `E4` int(11) DEFAULT NULL,
+  `E5` int(11) DEFAULT NULL,
+  `E6` int(11) DEFAULT NULL,
+  `E7` int(11) DEFAULT NULL,
+  `E8` int(11) DEFAULT NULL,
+  `E9` int(11) DEFAULT NULL,
+  `E10` int(11) DEFAULT NULL,
+  `E11` int(11) DEFAULT NULL,
+  `E12` int(11) DEFAULT NULL,
+  `E13` int(11) DEFAULT NULL,
+  `E14` int(11) DEFAULT NULL,
+  `E15` int(11) DEFAULT NULL,
+  `E16` int(11) DEFAULT NULL,
+  `E17` int(11) DEFAULT NULL,
+  `E18` int(11) DEFAULT NULL,
+  `E19` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -175,7 +205,8 @@ CREATE TABLE `news` (
 
 INSERT INTO `news` (`id`, `newstitle`, `newsDescription`, `postingDate`) VALUES
 (2, 'Test News', 'This is for testing. This is for testing.This is for testing.This is for testing.This is for testing.This is for testing.This is for testing.This is for testing.This is for testing.This is for testing.', '2022-02-10 17:36:50'),
-(3, 'New Course Started C#', 'This is sample text for testing.', '2022-02-11 00:54:38');
+(3, 'New Course Started C#', 'This is sample text for testing.', '2022-02-11 00:54:38'),
+(4, 'Deadline', 'Today is the last date to register for OC', '2023-04-06 10:46:59');
 
 -- --------------------------------------------------------
 
@@ -227,7 +258,7 @@ INSERT INTO `session` (`id`, `session`, `creationDate`) VALUES
 CREATE TABLE `stream` (
   `stream_id` int(11) NOT NULL,
   `stream_name` varchar(50) NOT NULL,
-  `optional_core_count` int(20) NOT NULL,
+  `optional_core_count` int(20) NOT NULL COMMENT 'value cannot be greater than 3',
   `elective_count` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -238,7 +269,11 @@ CREATE TABLE `stream` (
 INSERT INTO `stream` (`stream_id`, `stream_name`, `optional_core_count`, `elective_count`) VALUES
 (1, 'MCA', 2, 3),
 (2, 'MTECH_AI', 2, 3),
-(3, 'MTECH_CS', 2, 3);
+(3, 'MTECH_CS', 2, 3),
+(4, 'MTECH_IT', 3, 3),
+(5, 'IMTECH 3-4', 2, 3),
+(6, 'IMTECH 5-6', 2, 3),
+(7, 'IMTECH 7-8', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -247,7 +282,7 @@ INSERT INTO `stream` (`stream_id`, `stream_name`, `optional_core_count`, `electi
 --
 
 CREATE TABLE `students` (
-  `StudentRegno` varchar(255) NOT NULL,
+  `studentRegno` varchar(255) NOT NULL,
   `stream_id` int(11) NOT NULL,
   `studentPhoto` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -259,26 +294,9 @@ CREATE TABLE `students` (
   `cgpa` decimal(10,2) DEFAULT NULL,
   `courses_allocated_id` int(11) NOT NULL COMMENT 'course codes',
   `enrolment_status` tinyint(1) NOT NULL,
-  `E1` int(11) DEFAULT NULL,
-  `E2` int(11) DEFAULT NULL,
-  `E3` int(11) DEFAULT NULL,
-  `E4` int(11) DEFAULT NULL,
-  `E5` int(11) DEFAULT NULL,
-  `E6` int(11) DEFAULT NULL,
-  `E7` int(11) DEFAULT NULL,
-  `E8` int(11) DEFAULT NULL,
-  `E9` int(11) DEFAULT NULL,
-  `E10` int(11) DEFAULT NULL,
-  `E11` int(11) DEFAULT NULL,
-  `E12` int(11) DEFAULT NULL,
-  `E13` int(11) DEFAULT NULL,
-  `E14` int(11) DEFAULT NULL,
-  `E15` int(11) DEFAULT NULL,
-  `E16` int(11) DEFAULT NULL,
-  `E17` int(11) DEFAULT NULL,
-  `E18` int(11) DEFAULT NULL,
-  `E19` int(11) DEFAULT NULL,
-  `optional_core_choices` varchar(50) DEFAULT NULL,
+  `optional_core_choice_1` varchar(50) DEFAULT NULL,
+  `optional_core_choice_2` int(50) DEFAULT NULL,
+  `optional_core_choice_3` int(50) DEFAULT NULL,
   `password_status` tinyint(1) NOT NULL DEFAULT 0,
   `creationdate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
@@ -288,10 +306,13 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`StudentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `E1`, `E2`, `E3`, `E4`, `E5`, `E6`, `E7`, `E8`, `E9`, `E10`, `E11`, `E12`, `E13`, `E14`, `E15`, `E16`, `E17`, `E18`, `E19`, `optional_core_choices`, `password_status`, `creationdate`, `updationDate`) VALUES
-('10806121', 3, '', '12345', 'Anuj kumar', '822894', NULL, NULL, NULL, '7.10', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-02-11 00:53:31', '02-04-2023 03:19:14 PM'),
-('11233', 1, NULL, 'asdfsd', 'seee', '651773', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-04-02 10:12:45', NULL),
-('12356', 2, NULL, '123456', 'ayushi', '181793', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
+INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `optional_core_choice_1`, `optional_core_choice_2`, `optional_core_choice_3`, `password_status`, `creationdate`, `updationDate`) VALUES
+('11233', 1, NULL, 'Test@123', 'seee', '651773', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, '2023-04-02 10:12:45', NULL),
+('12356', 2, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, NULL, NULL, NULL, 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM'),
+('21mcmc12', 1, '', 'Test@123', 'Joel', '932894', NULL, NULL, NULL, '9.00', 0, 0, NULL, NULL, NULL, 1, '2023-04-03 16:32:37', '03-04-2023 10:04:48 PM'),
+('21mcmc13', 1, NULL, '123456', 'cutie', NULL, NULL, NULL, '3', '9.50', 1221, 0, '1', 1, 2, 3, '2023-04-08 19:55:12', NULL),
+('21mcmc45', 1, NULL, '96325', 'Mridani', '613518', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, '2023-04-06 05:55:09', NULL),
+('21mcmc56', 1, NULL, '2586', 'john', '139831', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, '2023-04-06 10:44:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -336,7 +357,17 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (21, '12356', 0x3a3a3100000000000000000000000000, '2023-04-02 10:52:43', '02-04-2023 04:23:57 PM', 1),
 (22, '12356', 0x3a3a3100000000000000000000000000, '2023-04-02 10:59:53', '02-04-2023 04:31:06 PM', 1),
 (23, '12356', 0x3a3a3100000000000000000000000000, '2023-04-02 11:01:13', '02-04-2023 05:11:23 PM', 1),
-(24, '12356', 0x3a3a3100000000000000000000000000, '2023-04-02 11:41:30', '02-04-2023 05:11:37 PM', 1);
+(24, '12356', 0x3a3a3100000000000000000000000000, '2023-04-02 11:41:30', '02-04-2023 05:11:37 PM', 1),
+(25, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-03 16:34:30', '03-04-2023 10:04:55 PM', 1),
+(26, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-03 16:35:24', '03-04-2023 10:07:22 PM', 1),
+(27, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-05 17:17:11', '05-04-2023 10:49:45 PM', 1),
+(28, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-06 05:56:17', NULL, 1),
+(29, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-06 10:26:52', '06-04-2023 03:57:57 PM', 1),
+(30, '21mcmc12', 0x3a3a3100000000000000000000000000, '2023-04-06 10:47:49', '06-04-2023 04:18:34 PM', 1),
+(31, '12356', 0x3a3a3100000000000000000000000000, '2023-04-08 20:10:27', NULL, 1),
+(32, '12356', 0x3a3a3100000000000000000000000000, '2023-04-10 08:01:57', '10-04-2023 02:14:33 PM', 1),
+(33, '12356', 0x3a3a3100000000000000000000000000, '2023-04-10 08:44:38', '10-04-2023 02:51:59 PM', 1),
+(34, '12356', 0x3a3a3100000000000000000000000000, '2023-04-10 09:22:04', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -352,7 +383,7 @@ ALTER TABLE `admin`
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`course_code`);
 
 --
 -- Indexes for table `courseenrolls`
@@ -364,13 +395,21 @@ ALTER TABLE `courseenrolls`
 -- Indexes for table `courses_allocated`
 --
 ALTER TABLE `courses_allocated`
-  ADD PRIMARY KEY (`courses_allocated_id`);
+  ADD PRIMARY KEY (`courses_allocated_id`),
+  ADD KEY `student_reg_no` (`student_reg_no`),
+  ADD KEY `course_code` (`course_code`);
 
 --
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `elective_preference`
+--
+ALTER TABLE `elective_preference`
+  ADD PRIMARY KEY (`elective_preference_id`);
 
 --
 -- Indexes for table `level`
@@ -406,7 +445,7 @@ ALTER TABLE `stream`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`StudentRegno`),
+  ADD PRIMARY KEY (`studentRegno`),
   ADD KEY `stream_id` (`stream_id`);
 
 --
@@ -423,12 +462,6 @@ ALTER TABLE `userlog`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `course`
---
-ALTER TABLE `course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -450,6 +483,12 @@ ALTER TABLE `department`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `elective_preference`
+--
+ALTER TABLE `elective_preference`
+  MODIFY `elective_preference_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
@@ -459,7 +498,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `semester`
@@ -477,17 +516,24 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `stream`
 --
 ALTER TABLE `stream`
-  MODIFY `stream_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `stream_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `courses_allocated`
+--
+ALTER TABLE `courses_allocated`
+  ADD CONSTRAINT `courses_allocated_ibfk_1` FOREIGN KEY (`student_reg_no`) REFERENCES `students` (`studentRegno`),
+  ADD CONSTRAINT `courses_allocated_ibfk_2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`);
 
 --
 -- Constraints for table `students`

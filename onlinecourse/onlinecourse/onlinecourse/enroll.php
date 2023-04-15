@@ -10,14 +10,14 @@ error_reporting(0);
 
 if(isset($_POST['submit']))
 {
-$studentregno=$_POST['studentregno'];
+$studentRegno=$_POST['studentRegno'];
 $pincode=$_POST['Pincode'];
 $session=$_POST['session'];
 $dept=$_POST['department'];
 $level=$_POST['level'];
 $course=$_POST['course'];
 $sem=$_POST['sem'];
-$ret=mysqli_query($con,"insert into courseenrolls(studentRegno,pincode,session,department,level,course,semester) values('$studentregno','$pincode','$session','$dept','$level','$course','$sem')");
+$ret=mysqli_query($con,"insert into courseenrolls(studentRegno,pincode,session,department,level,course,semester) values('$studentRegno','$pincode','$session','$dept','$level','$course','$sem')");
 if($ret)
 {
 echo '<script>alert("Enroll Successfully !!")</script>';
@@ -66,7 +66,7 @@ echo '<script>window.location.href=enroll.php</script>';
                           Course Enroll
                         </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-<?php $sql=mysqli_query($con,"select * from students where StudentRegno='".$_SESSION['login']."'");
+<?php $sql=mysqli_query($con,"select * from students where studentRegno='".$_SESSION['login']."'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 { ?>
@@ -79,8 +79,8 @@ while($row=mysqli_fetch_array($sql))
   </div>
 
  <div class="form-group">
-    <label for="studentregno">Student Reg No   </label>
-    <input type="text" class="form-control" id="studentregno" name="studentregno" value="<?php echo htmlentities($row['StudentRegno']);?>"  placeholder="Student Reg no" readonly />
+    <label for="studentRegno">Student Reg No   </label>
+    <input type="text" class="form-control" id="studentRegno" name="studentRegno" value="<?php echo htmlentities($row['studentRegno']);?>"  placeholder="Student Reg no" readonly />
     
   </div>
 

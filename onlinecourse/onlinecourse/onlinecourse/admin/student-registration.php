@@ -10,11 +10,11 @@ else{
 if(isset($_POST['submit']))
 {
 $studentname=$_POST['studentname'];
-$studentregno=$_POST['studentregno'];
+$studentRegno=$_POST['studentRegno'];
 $password=$_POST['password'];
 $pincode = rand(100000,999999);
 
-$ret=mysqli_query($con,"insert into students(studentName,StudentRegno,password,pincode,stream_id) values('$studentname','$studentregno','$password','$pincode',1)");
+$ret=mysqli_query($con,"insert into students(studentName,studentRegno,password,pincode,stream_id) values('$studentname','$studentRegno','$password','$pincode',1)");
 if($ret)
 {
 // echo '<script>alert("Student Registered Successfully. Pincode is "+"'.$pincode.'")</script>';
@@ -74,8 +74,8 @@ echo '<script>window.location.href=manage-students.php</script>';
   </div>
 
  <div class="form-group">
-    <label for="studentregno">Student Reg No   </label>
-    <input type="text" class="form-control" id="studentregno" name="studentregno" onBlur="userAvailability()" placeholder="Student Reg no" required />
+    <label for="studentRegno">Student Reg No   </label>
+    <input type="text" class="form-control" id="studentRegno" name="studentRegno" onBlur="userAvailability()" placeholder="Student Reg no" required />
      <span id="user-availability-status1" style="font-size:12px;">
   </div>
 
@@ -110,7 +110,7 @@ function userAvailability() {
 $("#loaderIcon").show();
 jQuery.ajax({
 url: "check_availability.php",
-data:'regno='+$("#studentregno").val(),
+data:'regno='+$("#studentRegno").val(),
 type: "POST",
 success:function(data){
 $("#user-availability-status1").html(data);

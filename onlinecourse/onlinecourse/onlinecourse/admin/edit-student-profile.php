@@ -17,7 +17,7 @@ $photo=$_FILES["photo"]["name"];
 
 $cgpa=$_POST['cgpa'];
 move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
-$ret=mysqli_query($con,"update students set studentName='$studentname',studentPhoto='$photo',cgpa='$cgpa'  where StudentRegno='$regid'");
+$ret=mysqli_query($con,"update students set studentName='$studentname',studentPhoto='$photo',cgpa='$cgpa'  where studentRegno='$regid'");
 if($ret)
 {
 echo '<script>alert("Student Record updated Successfully !!")</script>';
@@ -69,7 +69,7 @@ echo '<script>window.location.href=manage-students.php</script>';
 <?php 
 $regid=intval($_GET['id']);
 
-$sql=mysqli_query($con,"select * from students where StudentRegno='$regid'");
+$sql=mysqli_query($con,"select * from students where studentRegno='$regid'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 { ?>
@@ -82,8 +82,8 @@ while($row=mysqli_fetch_array($sql))
   </div>
 
  <div class="form-group">
-    <label for="studentregno">Student Reg No   </label>
-    <input type="text" class="form-control" id="studentregno" name="studentregno" value="<?php echo htmlentities($row['StudentRegno']);?>"  placeholder="Student Reg no" readonly />
+    <label for="studentRegno">Student Reg No   </label>
+    <input type="text" class="form-control" id="studentRegno" name="studentRegno" value="<?php echo htmlentities($row['studentRegno']);?>"  placeholder="Student Reg no" readonly />
     
   </div>
 

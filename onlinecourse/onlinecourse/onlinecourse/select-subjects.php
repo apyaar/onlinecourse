@@ -33,7 +33,7 @@ echo '<script>window.location.href=my-profile.php</script>';
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Student Profile</title>
+    <title>Select Subjects</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -52,7 +52,7 @@ echo '<script>window.location.href=my-profile.php</script>';
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Student Registration  </h1>
+                        <h1 class="page-head-line">Select Optional Core Subjects </h1>
                     </div>
                 </div>
                 <div class="row" >
@@ -60,10 +60,10 @@ echo '<script>window.location.href=my-profile.php</script>';
                     <div class="col-md-6">
                         <div class="panel panel-default">
                         <div class="panel-heading">
-                          Student Registration
+                          Select Optional Core Subjects
                         </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-<?php $sql=mysqli_query($con,"select * from students where studentRegno='".$_SESSION['login']."'");
+<?php $sql=mysqli_query($con,"SELECT * FROM students JOIN stream ON stream.stream_id = students.stream_id where studentRegno='".$_SESSION['login']."'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 { ?>
@@ -72,7 +72,7 @@ while($row=mysqli_fetch_array($sql))
                        <form name="dept" method="post" enctype="multipart/form-data">
    <div class="form-group">
     <label for="studentname">Student Name  </label>
-    <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['studentName']);?>"  />
+    <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['studentName']);?>" readonly />
   </div>
 
  <div class="form-group">
@@ -81,35 +81,59 @@ while($row=mysqli_fetch_array($sql))
     
   </div>
 
-
-
 <!-- <div class="form-group">
-    <label for="Pincode">Pincode  </label>
-    <input type="text" class="form-control" id="Pincode" name="Pincode" readonly value="<?php echo htmlentities($row['pincode']);?>" required />
-  </div>    -->
-
-<div class="form-group">
     <label for="CGPA">CGPA  </label>
     <input type="text" class="form-control" id="cgpa" name="cgpa"  value="<?php echo htmlentities($row['cgpa']);?>" required />
-  </div>  
-
-
+  </div>   -->
+<!-- 
 <div class="form-group">
     <label for="Pincode">Student Photo  </label>
    <?php if($row['studentPhoto']==""){ ?>
    <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
    <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
    <?php } ?>
-  </div>
+  </div> -->
+
+<!-- 
 <div class="form-group">
+    <label for="Optional Core">Department  </label>
+    <select class="form-control" name="department" required="required">
+   <option value="">Select Department</option>    -->
+   <!-- <?php 
+$sql=mysqli_query($con,"select * from department");
+while($row=mysqli_fetch_array($sql))
+{
+?>
+<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['department']);?></option>
+<?php } ?>
+
+    </select> 
+  </div>  -->
+
+
+  <div class="form-group">
+    <label for="Optional Core">Optional Core  </label>
+    <select class="form-control" name="department" required="required">
+   <option value="">Select Optional Core</option>   
+   <?php 
+$sql=mysqli_query($con,"select * from department");
+while($row=mysqli_fetch_array($sql))
+{
+?>
+<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['department']);?></option>
+<?php } ?>
+
+    </select> 
+  </div> 
+<!-- <div class="form-group">
     <label for="Pincode">Upload New Photo  </label>
     <input type="file" class="form-control" id="photo" name="photo"  value="<?php echo htmlentities($row['studentPhoto']);?>" />
-  </div>
+  </div> -->
 
 
   <?php } ?>
 
- <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
+ <button type="submit" name="submit" id="submit" class="btn btn-default">Update And Next</button>
 </form>
                             </div>
                             </div>

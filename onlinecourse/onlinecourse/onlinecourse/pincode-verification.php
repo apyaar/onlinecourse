@@ -12,7 +12,7 @@ date_default_timezone_set('Asia/Kolkata');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 if(isset($_POST['submit']))
 {
-$sql=mysqli_query($con,"SELECT * FROM  students where pincode='".trim($_POST['pincode'])."' && StudentRegno='".$_SESSION['login']."'");
+$sql=mysqli_query($con,"SELECT * FROM  students where pincode='".trim($_POST['pincode'])."' && studentRegno='".$_SESSION['login']."'");
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
