@@ -82,14 +82,9 @@ while($row=mysqli_fetch_array($sql))
     <label for="studentRegno">Student Reg No   </label>
     <input type="text" class="form-control" id="studentRegno" name="studentRegno" value="<?php echo htmlentities($row['studentRegno']);?>"  placeholder="Student Reg no" readonly />
     
+
   </div>
 
-
-
-<div class="form-group">
-    <label for="Pincode">Pincode  </label>
-    <input type="text" class="form-control" id="Pincode" name="Pincode" readonly value="<?php echo htmlentities($row['pincode']);?>" required />
-  </div>   
 
 <div class="form-group">
     <label for="Pincode">Student Photo  </label>
@@ -98,6 +93,36 @@ while($row=mysqli_fetch_array($sql))
    <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
    <?php } ?>
   </div>
+
+<div class="form-group">
+    <label for="Department">Stream  </label>  
+   <?php 
+$sql1=mysqli_query($con,"select * from stream where stream_id='".$row['stream_id']."'");
+$row1=mysqli_fetch_array($sql1);
+//  echo var_dump($row1); 
+?>
+<input type="text" class="form-control" id="streamName" name="streamName" readonly value="<?php echo htmlentities($row1['stream_name']);?>" required />
+  </div> 
+
+
+<div class="form-group">
+    <label for="Course">Course  </label>
+    <select class="form-control" name="course" id="course" onBlur="courseAvailability()" required="required">
+   <option value="">Select Course</option>   
+   <?php 
+$sql2=mysqli_query($con,"select * from eligible_optional_core where stream_id='".$row['stream_id']."'");
+while($row2=mysqli_fetch_array($sql2))
+{
+?>
+<option value="<?php echo htmlentities($row2['id']);?>"><?php echo htmlentities($row2['courseName']);?></option>
+<?php } ?>
+    </select> 
+    <span id="course-availability-status1" style="font-size:12px;">
+  </div>
+
+
+
+  
  <?php } ?>
 
 <div class="form-group">
@@ -117,23 +142,9 @@ while($row=mysqli_fetch_array($sql))
 
 
 
-<div class="form-group">
-    <label for="Department">Department  </label>
-    <select class="form-control" name="department" required="required">
-   <option value="">Select Depertment</option>   
-   <?php 
-$sql=mysqli_query($con,"select * from department");
-while($row=mysqli_fetch_array($sql))
-{
-?>
-<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['department']);?></option>
-<?php } ?>
-
-    </select> 
-  </div> 
 
 
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="Level">Level  </label>
     <select class="form-control" name="level" required="required">
    <option value="">Select Level</option>   
@@ -146,7 +157,7 @@ while($row=mysqli_fetch_array($sql))
 <?php } ?>
 
     </select> 
-  </div>  
+  </div>   -->
 
 <div class="form-group">
     <label for="Semester">Semester  </label>
@@ -163,21 +174,6 @@ while($row=mysqli_fetch_array($sql))
     </select> 
   </div>
 
-
-<div class="form-group">
-    <label for="Course">Course  </label>
-    <select class="form-control" name="course" id="course" onBlur="courseAvailability()" required="required">
-   <option value="">Select Course</option>   
-   <?php 
-$sql=mysqli_query($con,"select * from course");
-while($row=mysqli_fetch_array($sql))
-{
-?>
-<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['courseName']);?></option>
-<?php } ?>
-    </select> 
-    <span id="course-availability-status1" style="font-size:12px;">
-  </div>
 
 
 

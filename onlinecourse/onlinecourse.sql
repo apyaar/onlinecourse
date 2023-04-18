@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2023 at 09:28 AM
+-- Generation Time: Apr 18, 2023 at 02:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -205,7 +205,15 @@ INSERT INTO `eligible_optional_core` (`id`, `stream_id`, `stream_name`, `courseN
 (18, 1, 'MCA', 'Cloud Computing'),
 (19, 1, 'MCA', 'CIP'),
 (20, 1, 'MCA', 'Data Compression'),
-(21, 1, 'MCA', 'Virtualization');
+(21, 1, 'MCA', 'Virtualization'),
+(22, 2, 'MTECH_AI', 'ACN'),
+(23, 2, 'MTECH_AI', 'Advance Algo'),
+(24, 2, 'MTECH_AI', 'Biometrics'),
+(25, 2, 'MTECH_AI', 'Cloud Computing'),
+(26, 2, 'MTECH_AI', 'Internet of Things'),
+(27, 2, 'MTECH_AI', 'Meta Heuristics'),
+(28, 2, 'MTECH_AI', 'Machine Learning'),
+(29, 2, 'MTECH_AI', 'Network Security');
 
 -- --------------------------------------------------------
 
@@ -411,7 +419,9 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (37, '18MCME01', 0x3a3a3100000000000000000000000000, '2023-04-11 10:48:48', NULL, 1),
 (38, '12356', 0x3a3a3100000000000000000000000000, '2023-04-16 18:12:29', NULL, 1),
 (39, '12356', 0x3a3a3100000000000000000000000000, '2023-04-16 19:06:38', NULL, 1),
-(40, '12356', 0x3a3a3100000000000000000000000000, '2023-04-17 06:34:02', NULL, 1);
+(40, '12356', 0x3a3a3100000000000000000000000000, '2023-04-17 06:34:02', '18-04-2023 05:36:29 PM', 1),
+(41, '12356', 0x3a3a3100000000000000000000000000, '2023-04-18 12:07:09', NULL, 1),
+(42, '12356', 0x3a3a3100000000000000000000000000, '2023-04-18 12:22:08', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -543,7 +553,7 @@ ALTER TABLE `elective_preference`
 -- AUTO_INCREMENT for table `eligible_optional_core`
 --
 ALTER TABLE `eligible_optional_core`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -579,7 +589,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Constraints for dumped tables
