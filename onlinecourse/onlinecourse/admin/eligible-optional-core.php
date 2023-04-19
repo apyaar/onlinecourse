@@ -13,10 +13,7 @@ if(isset($_POST['submit']))
     // var_dump($_POST);
 $stream_name=$_POST['stream_name'];
     $selected_courses = $_POST['courses'];
-    // foreach($selected_courses as $course_name){
-    //     echo $course_name;
-    // }
-    
+  
     if (isset($_POST['courses'])) {
         $selected_courses = $_POST['courses'];
     } else {
@@ -24,7 +21,6 @@ $stream_name=$_POST['stream_name'];
     }
     $sql = mysqli_query($con, "select  * from stream where stream_name='".$stream_name."'");
     $row=mysqli_fetch_array($sql);
-    // echo $row['stream_id'];
     // Insert selected courses into database
     foreach ($selected_courses as $course_name) {
         $sql = "INSERT INTO eligible_optional_core (stream_id,stream_name,courseName)  VALUES ('".$row['stream_id']."','".$stream_name."', '".$course_name."')";
