@@ -107,16 +107,21 @@ $row1=mysqli_fetch_array($sql1);
 
 <div class="form-group">
     <label for="Course">Course  </label>
-    <select class="form-control" name="course" id="course" onBlur="courseAvailability()" required="required">
-   <option value="">Select Course</option>   
    <?php 
 $sql2=mysqli_query($con,"select * from eligible_optional_core where stream_id='".$row['stream_id']."'");
-while($row2=mysqli_fetch_array($sql2))
+$optional_core_count=$row1['optional_core_count'];
+while($optional_core_count--)
 {
 ?>
+<select class="form-control" name="optional_cores[]" id="optional_cores"  required="required">
+<option value= "">Select Optional Core</option>
+<?php while($row2=mysqli_fetch_array($sql2)) { ?>
 <option value="<?php echo htmlentities($row2['id']);?>"><?php echo htmlentities($row2['courseName']);?></option>
 <?php } ?>
-    </select> 
+</select> 
+<br>
+<?php } ?>
+   
     <span id="course-availability-status1" style="font-size:12px;">
   </div>
 
