@@ -11,7 +11,7 @@ else{
 if(isset($_POST['submit']))
 {
     // var_dump($_POST);
-$stream_name=$_POST['stream_name'];
+    $stream_name=$_POST['stream_name'];
     $selected_courses = $_POST['courses'];
     if (isset($_POST['courses'])) {
         $selected_courses = $_POST['courses'];

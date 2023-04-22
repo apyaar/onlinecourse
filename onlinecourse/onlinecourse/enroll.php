@@ -18,8 +18,21 @@ error_reporting(0);
 
 if(isset($_POST['submit']))
 {
-echo var_dump($_POST);
+$selected_val=$_POST['optional_cores'];
+$sql = mysqli_query($con, "select  * from students where studentRegno='".$_SESSION['login']."'");
+$row=mysqli_fetch_array($sql);
 
+$sql1 = mysqli_query($con,"select * from eligible_optional_core where stream_id='".$row['stream_id']."'");
+$row1=mysqli_fetch_array($sql1);
+
+echo var_dump($selected_val[0]);
+// foreach ($selected_val as $id) {
+  $sql3 = "UPDATE students SET optional_core_choice_1 = '".($selected_val[0] ? $selected_val[0] : "NULL")."', optional_core_choice_2 ='".($selected_val[1] ? $selected_val[1] : "NULL")."', optional_core_choice_3='".($selected_val[2] ? $selected_val[2] : "NULL")."'
+  WHERE studentRegno='".$_SESSION['login']."'";
+  mysqli_query($con, $sql3);
+
+// }
+// echo var_dump($selected_val[0]);
 }
 ?>
 
@@ -100,22 +113,44 @@ $row1=mysqli_fetch_array($sql1);
 
 
   <div class="form-group">
-    <label for="Course">Course</label>
+    <label for="Course">Course  </label>
     <?php 
     $sql2=mysqli_query($con,"select * from eligible_optional_core where stream_id='".$row['stream_id']."'");
     $row2=mysqli_fetch_all($sql2,MYSQLI_ASSOC);
     $optional_core_count=$row1['optional_core_count'];
+    for($i=0;$i<$optional_core_count;$i++) {
+        $selected_values = $_POST['optional_cores'][$i] ?? ''; // get the previously selected value
     ?>
-        <div class="optional-core-checkboxes">
-            <?php foreach($row2 as $rows2){ ?>
-                <label><input type="checkbox" name="optional_cores[]" value="<?php echo htmlentities($rows2['id']);?>"><?php echo htmlentities($rows2['courseName']);?></label>
-                <br>
-            <?php } ?>
-        </div>
-        
+    <select class="form-control" name="optional_cores[]" id="optional_cores_<?php echo $i; ?>" required="required">
+        <option value="">Select Optional Core</option>
+        <?php foreach($row2 as $rows2) {
+            $disabled = ''; // initialize the disabled attribute
+            if($selected_values == $rows2['id']) {
+                $disabled = 'disabled'; // disable the option if it was previously selected
+            }
+        ?>
+        <option value="<?php echo htmlentities($rows2['courseName']);?>" <?php echo $disabled; ?>><?php echo htmlentities($rows2['courseName']);?></option>
+        <?php } ?>
+    </select> 
+    <br>
+    <?php } ?>
     <span id="course-availability-status1" style="font-size:12px;"></span>
 </div>
 
+<script>
+// bind onchange event to each select element
+var selectElements = document.querySelectorAll('[name="optional_cores[]"]');
+selectElements.forEach(function(element, index) {
+    element.addEventListener('change', function() {
+        // get the selected value
+        var selectedValue = this.value;
+        // disable the option with the same value in the subsequent select elements
+        for(var i = index+1; i < selectElements.length; i++) {
+            selectElements[i].querySelector('option[value="' + selectedValue + '"]').disabled = true;
+        }
+    });
+});
+</script>
 
   
  <?php } ?>
