@@ -15,6 +15,9 @@ error_reporting(0);
 //   header('location:select-subjects.php');
 //   exit();
 // }
+if(isset($_POST['submit1'])){
+  header('location:select-subjects.php');
+}
 
 if(isset($_POST['submit']))
 {
@@ -25,12 +28,12 @@ $row=mysqli_fetch_array($sql);
 $sql1 = mysqli_query($con,"select * from eligible_optional_core where stream_id='".$row['stream_id']."'");
 $row1=mysqli_fetch_array($sql1);
 
-echo var_dump($selected_val[0]);
+// echo var_dump($selected_val[0]);
 // foreach ($selected_val as $id) {
   $sql3 = "UPDATE students SET optional_core_choice_1 = '".($selected_val[0] ? $selected_val[0] : "NULL")."', optional_core_choice_2 ='".($selected_val[1] ? $selected_val[1] : "NULL")."', optional_core_choice_3='".($selected_val[2] ? $selected_val[2] : "NULL")."'
   WHERE studentRegno='".$_SESSION['login']."'";
   mysqli_query($con, $sql3);
-
+  echo '<script>alert("Optional Core Uploaded Successfully Proceed for Elective Preference Upload");</script>';
 // }
 // echo var_dump($selected_val[0]);
 }
@@ -156,9 +159,9 @@ selectElements.forEach(function(element, index) {
  <?php } ?>
 
 
-
+<!-- 
 <div class="form-group">
-    <label for="Semester">Semester  </label>
+    <label for="elective-preference">Semester  </label>
     <select class="form-control" name="sem" required="required">
    <option value="">Select Semester</option>   
 
@@ -169,13 +172,16 @@ while($row=mysqli_fetch_array($sql))
 <option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['semester']);?></option>
 <?php } ?>
   </select> 
-</div>
+</div> -->
 
-
-
-
- <button type="submit" name="submit" id="submit" class="btn btn-default">Enroll</button>
+ <button type="submit" name="submit" id="submit" class="btn btn-default">Upload Optional Cores</button>
 </form>
+<form method='post'>
+ <div>
+ <button type="submit" name="submit1" id="submit1" class="btn btn-default">Proceed for Elective Preference</button>
+</div>
+</form>
+
                             </div>
                             </div>
                     </div>
