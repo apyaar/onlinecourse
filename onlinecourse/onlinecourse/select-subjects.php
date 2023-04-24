@@ -11,19 +11,7 @@ else{
 if(isset($_POST['submit']))
 {
   echo var_dump($_POST);
-$studentname=$_POST['studentname'];
-$photo=$_FILES["photo"]["name"];
-$cgpa=$_POST['cgpa'];
-move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
-$ret=mysqli_query($con,"update students set studentName='$studentname',studentPhoto='$photo',cgpa='$cgpa'  where studentRegno='".$_SESSION['login']."'");
-if($ret)
-{
-echo '<script>alert("Student Record updated Successfully !!")</script>';
-echo '<script>window.location.href=my-profile.php</script>';    
-}else{
-echo '<script>alert("Something went wrong . Please try again.!")</script>';
-echo '<script>window.location.href=my-profile.php</script>';    
-}
+
 }
 ?>
 
@@ -53,7 +41,7 @@ echo '<script>window.location.href=my-profile.php</script>';
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Select Optional Core Subjects </h1>
+                        <h1 class="page-head-line">Select elective preferences </h1>
                     </div>
                 </div>
                 <div class="row" >
@@ -82,55 +70,57 @@ while($row=mysqli_fetch_array($sql))
     
   </div>
 
-<!-- <div class="form-group">
-    <label for="CGPA">CGPA  </label>
-    <input type="text" class="form-control" id="cgpa" name="cgpa"  value="<?php echo htmlentities($row['cgpa']);?>" required />
-  </div>   -->
-<!-- 
-<div class="form-group">
-    <label for="Pincode">Student Photo  </label>
-   <?php if($row['studentPhoto']==""){ ?>
-   <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
-   <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
-   <?php } ?>
-  </div> -->
-
-<!-- 
-<div class="form-group">
-    <label for="Optional Core">Department  </label>
-    <select class="form-control" name="department" required="required">
-   <option value="">Select Department</option>    -->
-   <!-- <?php 
-$sql=mysqli_query($con,"select * from department");
-while($row=mysqli_fetch_array($sql))
-{
-?>
-<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['department']);?></option>
-<?php } ?>
-
-    </select> 
-  </div>  -->
-
-
   <div class="form-group">
-    <label for="Optional Core">Optional Core  </label>
-    <select class="form-control" name="department" required="required">
-   <option value="">Select Optional Core</option>   
-   <?php 
-$sql=mysqli_query($con,"select courseName from eligible_optional_core join students on eligible_optional_core.stream_id = students.stream_id ");
-while($row=mysqli_fetch_array($sql))
-{
-?>
-<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['courseName']);?></option>
-<?php } ?>
-
+    <label for="Course">Electives</label>
+    <?php 
+        $sql2 = mysqli_query($con, "SELECT courseName FROM course WHERE courseName NOT IN (SELECT optional_core_choice_1 FROM students WHERE studentRegno = '".$_SESSION['login']."' UNION SELECT optional_core_choice_2 FROM students WHERE studentRegno = '".$_SESSION['login']."' UNION SELECT optional_core_choice_3 FROM students WHERE studentRegno = '".$_SESSION['login']."')");
+        $row2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
+        $count = count($row2);
+        $i = 0;
+    ?>
+    <?php while($count--) { ?>
+    <?php $id = 'electives_'.$i; ?>
+    <br>
+    <label for="Course">Elective preference <?php echo ++$i; ?></label>
+    <select class="form-control" name="electives[]" id="<?php echo $id; ?>" required="required">
+        <option value="">Select Elective Subject</option>
+        <?php foreach($row2 as $rows2){ ?>
+            <option value="<?php echo htmlentities($rows2['courseName']);?>"><?php echo htmlentities($rows2['courseName']);?></option>
+        <?php } ?>
     </select> 
-  </div> 
+    <br>
+    <?php } ?> 
+    <span id="course-availability-status1" style="font-size:12px;"></span>
+</div>
 
+<script>
+    // Get all dropdowns with name "electives[]"
+    const dropdowns = document.querySelectorAll('select[name="electives[]"]');
+    
+    // Loop through each dropdown
+    dropdowns.forEach((dropdown, index) => {
+        // Add event listener to each dropdown
+        dropdown.addEventListener('change', () => {
+            // Get the selected option value
+            const selectedValue = dropdown.value;
+            
+            // Loop through all subsequent dropdowns
+            for(let i = index + 1; i < dropdowns.length; i++) {
+                // Disable the selected option in each subsequent dropdown
+                const options = dropdowns[i].options;
+                for(let j = 0; j < options.length; j++) {
+                    if(options[j].value === selectedValue) {
+                        options[j].disabled = true;
+                    }
+                }
+            }
+        });
+    });
+</script>
 
   <?php } ?>
 
- <button type="submit" name="submit" id="submit" class="btn btn-default">Update And Next</button>
+ <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
 </form>
                             </div>
                             </div>

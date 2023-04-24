@@ -11,9 +11,8 @@ else{
 if(isset($_POST['submit']))
 {
     // var_dump($_POST);
-$stream_name=$_POST['stream_name'];
+    $stream_name=$_POST['stream_name'];
     $selected_courses = $_POST['courses'];
-  
     if (isset($_POST['courses'])) {
         $selected_courses = $_POST['courses'];
     } else {
@@ -26,7 +25,16 @@ $stream_name=$_POST['stream_name'];
         $sql = "INSERT INTO eligible_optional_core (stream_id,stream_name,courseName)  VALUES ('".$row['stream_id']."','".$stream_name."', '".$course_name."')";
         mysqli_query($con, $sql);
     }
-    
+    // to remove duplicate values 
+    $sql = "    DELETE FROM eligible_optional_core 
+    WHERE id NOT IN (
+        SELECT MIN(id)
+        FROM eligible_optional_core
+        GROUP BY stream_name, courseName
+    )";
+        mysqli_query($con, $sql);
+
+
     echo "Selected courses have been saved.";
     
 }

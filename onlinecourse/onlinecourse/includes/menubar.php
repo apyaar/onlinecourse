@@ -7,7 +7,7 @@
                         <li><a href="my-profile.php">My Profile</a></li>
                              <li><a href="enroll.php">Enroll for Course </a></li>
                              <li><a href="enroll-history.php">Enroll History  </a></li>
-                             <li><a href="select-subjects.php"> Select Subjects  </a></li>
+                             <!-- <li><a href="select-subjects.php"> Select Subjects  </a></li> -->
                                <li><a href="change-password.php">Change Password</a></li>
                             <li><a href="logout.php">Logout</a></li>
 
