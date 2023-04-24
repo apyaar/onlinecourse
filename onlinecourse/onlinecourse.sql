@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 02:32 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Apr 24, 2023 at 06:09 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `admin` (
   `password` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -51,7 +51,7 @@ INSERT INTO `admin` (`id`, `username`, `password`, `creationDate`, `updationDate
 
 CREATE TABLE `course` (
   `course_code` varchar(255) NOT NULL,
-  `courseName` varchar(255) DEFAULT NULL,
+  `courseName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `courseUnit` varchar(255) DEFAULT NULL,
   `noofSeats` int(11) DEFAULT NULL,
   `bucket_number` int(11) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `course` (
   `seats_for_MTECH_IT` int(11) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `course`
@@ -107,7 +107,7 @@ CREATE TABLE `courseenrolls` (
   `semester` int(11) DEFAULT NULL,
   `course` int(11) DEFAULT NULL,
   `enrollDate` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `courseenrolls`
@@ -127,10 +127,10 @@ INSERT INTO `courseenrolls` (`id`, `studentRegno`, `pincode`, `session`, `depart
 
 CREATE TABLE `courses_allocated` (
   `courses_allocated_id` int(11) NOT NULL,
-  `course_code` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `course_code` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `course_name` varchar(50) NOT NULL,
-  `student_reg_no` varchar(255) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `student_reg_no` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE `department` (
   `id` int(11) NOT NULL,
   `department` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `department`
@@ -180,7 +180,7 @@ CREATE TABLE `elective_preference` (
   `E17` int(11) DEFAULT NULL,
   `E18` int(11) DEFAULT NULL,
   `E19` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,7 @@ CREATE TABLE `eligible_optional_core` (
   `stream_id` int(11) NOT NULL,
   `stream_name` varchar(255) NOT NULL,
   `courseName` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `eligible_optional_core`
@@ -205,7 +205,14 @@ INSERT INTO `eligible_optional_core` (`id`, `stream_id`, `stream_name`, `courseN
 (22, 5, 'IMTECH 3-4', 'DL'),
 (23, 5, 'IMTECH 3-4', 'SP'),
 (24, 3, 'MTECH_CS', 'DL'),
-(25, 3, 'MTECH_CS', 'EHFC');
+(25, 3, 'MTECH_CS', 'EHFC'),
+(26, 1, 'MCA', 'Network Security'),
+(27, 1, 'MCA', 'SM'),
+(28, 1, 'MCA', 'SNA'),
+(29, 1, 'MCA', 'Social System'),
+(34, 1, 'MCA', 'ACN'),
+(37, 1, 'MCA', 'SP'),
+(38, 1, 'MCA', 'System Security');
 
 -- --------------------------------------------------------
 
@@ -217,7 +224,7 @@ CREATE TABLE `level` (
   `id` int(11) NOT NULL,
   `level` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `level`
@@ -239,7 +246,7 @@ CREATE TABLE `news` (
   `newstitle` varchar(255) DEFAULT NULL,
   `newsDescription` mediumtext DEFAULT NULL,
   `postingDate` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `news`
@@ -262,7 +269,7 @@ CREATE TABLE `semester` (
   `semester` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `semester`
@@ -283,7 +290,7 @@ CREATE TABLE `session` (
   `id` int(11) NOT NULL,
   `session` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `session`
@@ -303,7 +310,7 @@ CREATE TABLE `stream` (
   `stream_name` varchar(50) NOT NULL,
   `optional_core_count` int(20) NOT NULL COMMENT 'value cannot be greater than 3',
   `elective_count` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `stream`
@@ -337,20 +344,20 @@ CREATE TABLE `students` (
   `cgpa` decimal(10,2) DEFAULT NULL,
   `courses_allocated_id` int(11) NOT NULL COMMENT 'course codes',
   `enrolment_status` tinyint(1) NOT NULL,
-  `optional_core_choice_1` varchar(50) DEFAULT NULL,
-  `optional_core_choice_2` int(50) DEFAULT NULL,
-  `optional_core_choice_3` int(50) DEFAULT NULL,
+  `optional_core_choice_1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `optional_core_choice_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `optional_core_choice_3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `password_status` tinyint(1) NOT NULL DEFAULT 0,
   `creationdate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `optional_core_choice_1`, `optional_core_choice_2`, `optional_core_choice_3`, `password_status`, `creationdate`, `updationDate`) VALUES
-('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, NULL, NULL, NULL, 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
+('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'Advance Algo', 'Network Security', 'NULL', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
 
 -- --------------------------------------------------------
 
@@ -365,7 +372,7 @@ CREATE TABLE `userlog` (
   `loginTime` timestamp NULL DEFAULT current_timestamp(),
   `logout` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `userlog`
@@ -415,7 +422,11 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (41, '12356', 0x3a3a3100000000000000000000000000, '2023-04-17 11:12:47', '17-04-2023 04:54:29 PM', 1),
 (42, '12356', 0x3a3a3100000000000000000000000000, '2023-04-17 11:25:24', '17-04-2023 05:08:28 PM', 1),
 (43, '12356', 0x3a3a3100000000000000000000000000, '2023-04-18 05:29:12', NULL, 1),
-(44, '12356', 0x3a3a3100000000000000000000000000, '2023-04-18 11:02:28', NULL, 1);
+(44, '12356', 0x3a3a3100000000000000000000000000, '2023-04-18 11:02:28', NULL, 1),
+(45, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 12:39:35', '22-04-2023 11:26:03 PM', 1),
+(46, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 17:56:11', '23-04-2023 12:08:03 AM', 1),
+(47, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 18:45:43', NULL, 1),
+(48, '12356', 0x3a3a3100000000000000000000000000, '2023-04-23 16:53:07', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -547,7 +558,7 @@ ALTER TABLE `elective_preference`
 -- AUTO_INCREMENT for table `eligible_optional_core`
 --
 ALTER TABLE `eligible_optional_core`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -583,7 +594,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
