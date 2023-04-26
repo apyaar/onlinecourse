@@ -75,6 +75,7 @@ echo '<script>window.location.href=manage-students.php</script>';
                                             <th>#</th>
                                             <th>Reg No </th>
                                             <th>Student Name </th>
+                                            <th>Password</th>
                                             <!-- <th> Pincode</th> -->
                                              <th>Reg Date</th>
                                              <th>Action</th>
@@ -94,6 +95,7 @@ while($row=mysqli_fetch_array($sql))
                                             <td><?php echo htmlentities($row['studentRegno']);?></td>
                                             <td><?php echo htmlentities($row['studentName']);?></td>
                                             <!-- <td><?php echo htmlentities($row['pincode']);?></td> -->
+                                            <td><?php echo htmlentities($row['password']);?></td>
                                             <td><?php echo htmlentities($row['creationdate']);?></td>
                                             <td>
                                             <a href="edit-student-profile.php?id=<?php echo $row['studentRegno']?>">

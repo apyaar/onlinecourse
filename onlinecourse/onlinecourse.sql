@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2023 at 06:09 PM
+-- Generation Time: Apr 26, 2023 at 09:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -161,26 +161,33 @@ INSERT INTO `department` (`id`, `department`, `creationDate`) VALUES
 CREATE TABLE `elective_preference` (
   `elective_preference_id` int(11) NOT NULL,
   `studentRegno` varchar(255) NOT NULL,
-  `E1` int(11) DEFAULT NULL,
-  `E2` int(11) DEFAULT NULL,
-  `E3` int(11) DEFAULT NULL,
-  `E4` int(11) DEFAULT NULL,
-  `E5` int(11) DEFAULT NULL,
-  `E6` int(11) DEFAULT NULL,
-  `E7` int(11) DEFAULT NULL,
-  `E8` int(11) DEFAULT NULL,
-  `E9` int(11) DEFAULT NULL,
-  `E10` int(11) DEFAULT NULL,
-  `E11` int(11) DEFAULT NULL,
-  `E12` int(11) DEFAULT NULL,
-  `E13` int(11) DEFAULT NULL,
-  `E14` int(11) DEFAULT NULL,
-  `E15` int(11) DEFAULT NULL,
-  `E16` int(11) DEFAULT NULL,
-  `E17` int(11) DEFAULT NULL,
-  `E18` int(11) DEFAULT NULL,
-  `E19` int(11) DEFAULT NULL
+  `E1` varchar(255) DEFAULT NULL,
+  `E2` varchar(255) DEFAULT NULL,
+  `E3` varchar(255) DEFAULT NULL,
+  `E4` varchar(255) DEFAULT NULL,
+  `E5` varchar(255) DEFAULT NULL,
+  `E6` varchar(255) DEFAULT NULL,
+  `E7` varchar(255) DEFAULT NULL,
+  `E8` varchar(255) DEFAULT NULL,
+  `E9` varchar(255) DEFAULT NULL,
+  `E10` varchar(255) DEFAULT NULL,
+  `E11` varchar(255) DEFAULT NULL,
+  `E12` varchar(255) DEFAULT NULL,
+  `E13` varchar(255) DEFAULT NULL,
+  `E14` varchar(255) DEFAULT NULL,
+  `E15` varchar(255) DEFAULT NULL,
+  `E16` varchar(255) DEFAULT NULL,
+  `E17` varchar(255) DEFAULT NULL,
+  `E18` varchar(255) DEFAULT NULL,
+  `E19` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `elective_preference`
+--
+
+INSERT INTO `elective_preference` (`elective_preference_id`, `studentRegno`, `E1`, `E2`, `E3`, `E4`, `E5`, `E6`, `E7`, `E8`, `E9`, `E10`, `E11`, `E12`, `E13`, `E14`, `E15`, `E16`, `E17`, `E18`, `E19`) VALUES
+(1, '12356', 'ACN', 'Biometrics', 'Internet of Things', 'Machine Learning', 'Meta Heuristics', 'Cloud Computing', 'CIP', 'Data Compression', 'DDPC', 'EHFC', 'SP', 'DL', 'SM', 'SNA', 'Social System', 'System Security', 'Virtualization', 'NULL', 'NULL');
 
 -- --------------------------------------------------------
 
@@ -317,7 +324,7 @@ CREATE TABLE `stream` (
 --
 
 INSERT INTO `stream` (`stream_id`, `stream_name`, `optional_core_count`, `elective_count`) VALUES
-(1, 'MCA', 2, 3),
+(1, 'MCA', 3, 3),
 (2, 'MTECH_AI', 2, 3),
 (3, 'MTECH_CS', 2, 3),
 (4, 'MTECH_IT', 3, 3),
@@ -357,7 +364,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `optional_core_choice_1`, `optional_core_choice_2`, `optional_core_choice_3`, `password_status`, `creationdate`, `updationDate`) VALUES
-('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'Advance Algo', 'Network Security', 'NULL', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
+('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'Virtualization', 'Advance Algo', 'NULL', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
 
 -- --------------------------------------------------------
 
@@ -426,7 +433,10 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (45, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 12:39:35', '22-04-2023 11:26:03 PM', 1),
 (46, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 17:56:11', '23-04-2023 12:08:03 AM', 1),
 (47, '12356', 0x3a3a3100000000000000000000000000, '2023-04-22 18:45:43', NULL, 1),
-(48, '12356', 0x3a3a3100000000000000000000000000, '2023-04-23 16:53:07', NULL, 1);
+(48, '12356', 0x3a3a3100000000000000000000000000, '2023-04-23 16:53:07', NULL, 1),
+(49, '12356', 0x3a3a3100000000000000000000000000, '2023-04-25 04:40:40', NULL, 1),
+(50, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 16:13:02', '26-04-2023 11:25:14 PM', 1),
+(51, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 18:00:47', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -552,7 +562,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `elective_preference`
 --
 ALTER TABLE `elective_preference`
-  MODIFY `elective_preference_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `elective_preference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `eligible_optional_core`
@@ -594,7 +604,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
