@@ -8,17 +8,22 @@ error_reporting(0);
 // header('location:index.php');
 // }
 // else{
-
-  // if($optional_core_count<=0)
-// {
-//   echo var_dump($optional_core_count);
-//   header('location:select-subjects.php');
-//   exit();
-// }
-if(isset($_POST['submit1'])){
-  header('location:select-subjects.php');
+$sql=mysqli_query($con,"select * from students where studentRegno='".$_SESSION['login']."'");
+$row=mysqli_fetch_array($sql);
+$sql1=mysqli_query($con,"select * from stream where stream_id='".$row['stream_id']."'");
+while($row1=mysqli_fetch_array($sql1)){
+  if($row1['optional_core_count']<=0)
+  {
+    // echo var_dump($row1);
+      header('location:elective-preference.php');
+    exit();
+  }
 }
 
+  
+if(isset($_POST['submit1'])){
+  header('location:elective-preference.php');
+} 
 if(isset($_POST['submit']))
 {
 $selected_val=$_POST['optional_cores'];
@@ -155,6 +160,7 @@ selectElements.forEach(function(element, index) {
 });
 </script>
 
+
   
  <?php } ?>
 
@@ -174,12 +180,20 @@ while($row=mysqli_fetch_array($sql))
   </select> 
 </div> -->
 
- <button type="submit" name="submit" id="submit" class="btn btn-default">Upload Optional Cores</button>
+ <button type="submit" name="submit" id="submit" class="btn btn-default">Submit Optional Cores</button>
 </form>
 <form method='post'>
  <div>
  <button type="submit" name="submit1" id="submit1" class="btn btn-default">Proceed for Elective Preference</button>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#submit1').prop('disabled', true);
+        $('#submit').on('click', function() {
+            $('#submit1').prop('disabled', false);
+        });
+    });
+</script>
 </form>
 
                             </div>
