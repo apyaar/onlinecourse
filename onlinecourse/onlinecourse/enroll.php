@@ -58,6 +58,7 @@ $row1=mysqli_fetch_array($sql1);
 </head>
 
 <body>
+  
 <?php include('includes/header.php');?>
     <!-- LOGO HEADER END-->
 <?php if($_SESSION['login']!="")
@@ -159,42 +160,26 @@ selectElements.forEach(function(element, index) {
     });
 });
 </script>
-
-
-  
  <?php } ?>
 
-
-<!-- 
-<div class="form-group">
-    <label for="elective-preference">Semester  </label>
-    <select class="form-control" name="sem" required="required">
-   <option value="">Select Semester</option>   
-
-<?php $sql=mysqli_query($con,"select * from semester");
-while($row=mysqli_fetch_array($sql))
-{
-?>
-<option value="<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['semester']);?></option>
-<?php } ?>
-  </select> 
-</div> -->
-
  <button type="submit" name="submit" id="submit" class="btn btn-default">Submit Optional Cores</button>
-</form>
+</form> 
+<br>
+
+<?php 
+$sql = mysqli_query($con,"select * from students where studentRegno='".$_SESSION['login']."'");
+$row = mysqli_fetch_array($sql);
+
+$isColumnNull = ($row['optional_core_choice_1'] == null); // check if the column is null
+
+?>
 <form method='post'>
  <div>
- <button type="submit" name="submit1" id="submit1" class="btn btn-default">Proceed for Elective Preference</button>
+ <button type="submit" name="submit1" id="submit1" class="btn btn-default" <?php if ($isColumnNull) { echo 'disabled'; } ?>>Proceed for Elective Preference</button>
 </div>
-<script>
-    $(document).ready(function() {
-        $('#submit1').prop('disabled', true);
-        $('#submit').on('click', function() {
-            $('#submit1').prop('disabled', false);
-        });
-    });
-</script>
-</form>
+</form> 
+
+
 
                             </div>
                             </div>

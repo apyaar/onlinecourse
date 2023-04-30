@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 09:02 PM
+-- Generation Time: Apr 30, 2023 at 07:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -364,7 +364,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `optional_core_choice_1`, `optional_core_choice_2`, `optional_core_choice_3`, `password_status`, `creationdate`, `updationDate`) VALUES
-('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'Virtualization', 'Advance Algo', 'NULL', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
+('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'SM', 'Advance Algo', 'Virtualization', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
 
 -- --------------------------------------------------------
 
@@ -436,7 +436,9 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (48, '12356', 0x3a3a3100000000000000000000000000, '2023-04-23 16:53:07', NULL, 1),
 (49, '12356', 0x3a3a3100000000000000000000000000, '2023-04-25 04:40:40', NULL, 1),
 (50, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 16:13:02', '26-04-2023 11:25:14 PM', 1),
-(51, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 18:00:47', NULL, 1);
+(51, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 18:00:47', NULL, 1),
+(52, '12356', 0x3a3a3100000000000000000000000000, '2023-04-29 17:47:37', NULL, 1),
+(53, '12356', 0x3a3a3100000000000000000000000000, '2023-04-30 17:07:53', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -604,7 +606,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Constraints for dumped tables
