@@ -69,8 +69,10 @@ if(isset($_POST['submit']))
        echo '<script>alert("Optional cores allocated.")</script>';
 }
 
-
-
+if(isset($_POST['submitElective']))
+{
+    
+}
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +136,29 @@ while($row=mysqli_fetch_array($sql))
 
  <button type="submit" name="submit" id="submit" class="btn btn-default">Allocate Optional Core</button>
 </form>
+<br>
+<form method="post" >
+   
+                       <div class="form-group">
+    <label for="stream_name">Select Stream</label>
+    <select class="form-control" name="stream_idx" required="required">
+   <option value="">Select Stream</option>   
+   <?php 
+$sql=mysqli_query($con,"select * from stream");
+while($row=mysqli_fetch_array($sql))
+{
+?>
+<option value="<?php echo htmlentities($row['stream_id']);?>"><?php echo htmlentities($row['stream_name']);?></option>
+<?php } ?>
+    </select> 
+   </div> 
+
+ <button type="submit" name="submitElective" id="submitElective" class="btn btn-default">Allocate Electives</button>
+</form>
+
                             </div>
+
+                            
                             </div>
                     </div>
                   

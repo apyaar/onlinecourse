@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 09:53 AM
+-- Generation Time: May 06, 2023 at 02:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -132,6 +132,14 @@ CREATE TABLE `courses_allocated` (
   `course_name` varchar(50) NOT NULL,
   `course_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses_allocated`
+--
+
+INSERT INTO `courses_allocated` (`courses_allocated_id`, `student_reg_no`, `course_code`, `course_name`, `course_type`) VALUES
+(57, '18MCME03', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
+(58, '18MCME03', 'SysSec-BMM*', 'System Security', 'optional_Core');
 
 -- --------------------------------------------------------
 
@@ -588,7 +596,7 @@ ALTER TABLE `courseenrolls`
 -- AUTO_INCREMENT for table `courses_allocated`
 --
 ALTER TABLE `courses_allocated`
-  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `department`
