@@ -7,19 +7,23 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
-
 if(isset($_POST['submit']))
 {
-    // var_dump($_POST);
- 
-    $sql = mysqli_query($con, "SELECT studentRegno, optional_core_choice_1, optional_core_choice_2, optional_core_choice_3,enrolment_status 
+    
+    $sql0 =mysqli_query($con,"SELECT * FROM stream WHERE stream_id='".$_POST['stream_idx']."';");
+    $row0 = mysqli_fetch_array($sql0);
+
+ //this is for fetching optional core choices from student table since we're only storing stream id from this page
+    $sql = mysqli_query($con, "SELECT studentRegno, optional_core_choice_1, optional_core_choice_2, optional_core_choice_3,enrolment_status_optional 
     FROM students
-    WHERE stream_id = '".$_POST['stream_idx']."' AND (optional_core_choice_1 IS NOT NULL OR optional_core_choice_2 IS NOT NULL OR optional_core_choice_3 IS NOT NULL) AND enrolment_status=0
+    WHERE stream_id = '".$_POST['stream_idx']."' AND (optional_core_choice_1 IS NOT NULL OR optional_core_choice_2 IS NOT NULL OR optional_core_choice_3 IS NOT NULL) AND enrolment_status_optional=0
     ORDER BY cgpa DESC;");
    $row=mysqli_fetch_array($sql);
 
-  echo $row['optional_core_choice_3']!=="NULL";
+//    var_dump($row);
 
+//since we have only 3 optional cores at max we're not using loop
+//if the optional core choice values are not null insert them into allocated courses table and allocate optional core to the student
         if($row['optional_core_choice_1']!=="NULL"){
         $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
         SELECT 
@@ -57,7 +61,7 @@ if(isset($_POST['submit']))
         ";
         mysqli_query($con,$sql1);
         }
-
+//this is for removing duplicate values if the submit button is clicked more than once
         $sql1="DELETE FROM courses_allocated 
        WHERE courses_allocated_id NOT IN (
             SELECT MIN(courses_allocated_id)
@@ -65,15 +69,56 @@ if(isset($_POST['submit']))
             GROUP BY student_reg_no, course_code
        )";
        mysqli_query($con,$sql1);
+       
+
+//updating the status of that student that is enrolled
+    //    $sql1= "UPDATE students
+    //    SET enrolment_status_optional=1
+    //    WHERE studentRegno='".$row['studentRegno']."'; ";
+    //    mysqli_query($con,$sql1);
 
        echo '<script>alert("Optional cores allocated.")</script>';
+      
 }
 
 if(isset($_POST['submitElective']))
 {
+
+    $sql=mysqli_query($con,"SELECT * FROM students JOIN elective_preference ON students.studentRegno = elective_preference.studentRegno WHERE students.stream_id = '".$_POST['stream_idx']."' AND students.enrolment_status_elective = 0
+    ORDER BY students.cgpa DESC;");
+    $row=mysqli_fetch_array($sql);
+
+    if($row['E1']!=="NULL"){
+
+        //updating the seats for that course for particular stream
+        // $sql2="UPDATE courses set ".$row['strea']."=MCA+1 where "
+
+        $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
+        SELECT 
+            '".$row['studentRegno']."',
+            (SELECT course_code FROM course WHERE courseName = '".$row['E1']."'),
+            '".$row['E1']."',
+            'Elective'
+        WHERE '".$row['E1']."' IS NOT NULL;";
+        mysqli_query($con,$sql1);
+        }
+
+
+    //this is for removing duplicate values if the submit button is clicked more than once
+    $sql1="DELETE FROM courses_allocated 
+    WHERE courses_allocated_id NOT IN (
+         SELECT MIN(courses_allocated_id)
+         FROM courses_allocated
+         GROUP BY student_reg_no, course_code
+    )";
+    mysqli_query($con,$sql1);
     
+    var_dump($row);
 }
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -165,11 +210,6 @@ while($row=mysqli_fetch_array($sql))
                 </div>
 
             </div>
-
-
-
-
-
         </div>
     </div>
   <?php include('includes/footer.php');?>

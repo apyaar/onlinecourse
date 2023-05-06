@@ -17,12 +17,29 @@ if(isset($_POST['submit']))
     }else{
         $selected_val = array();
     }
-    $sql="UPDATE elective_preference SET studentRegno='".$_POST['studentRegno']."',E1='".($selected_val[0] ? $selected_val[0] : "NULL")."',E2='".($selected_val[1] ? $selected_val[1] : "NULL")."',E3='".($selected_val[2] ? $selected_val[2] : "NULL")."',E4='".($selected_val[3] ? $selected_val[3] : "NULL")."',E5='".($selected_val[4] ? $selected_val[4] : "NULL")."',E6='".($selected_val[5] ? $selected_val[5] : "NULL")."',
-    E7='".($selected_val[6] ? $selected_val[6] : "NULL")."',E8='".($selected_val[7] ? $selected_val[7] : "NULL")."',E9='".($selected_val[8] ? $selected_val[8] : "NULL")."',E10='".($selected_val[9] ? $selected_val[9] : "NULL")."',E11='".($selected_val[10] ? $selected_val[10] : "NULL")."',E12='".($selected_val[11] ? $selected_val[11] : "NULL")."',E13='".($selected_val[12] ? $selected_val[12] : "NULL")."',
-    E14='".($selected_val[13] ? $selected_val[13] : "NULL")."',E15='".($selected_val[14] ? $selected_val[14] : "NULL")."',E16='".($selected_val[15] ? $selected_val[15] : "NULL")."',
-    E17='".($selected_val[16] ? $selected_val[16] : "NULL")."',E18='".($selected_val[17] ? $selected_val[17] : "NULL")."',E19='".($selected_val[18] ? $selected_val[18] : "NULL")."'";
-    mysqli_query($con,$sql);
+
+    $regno = $_POST['studentRegno'];
+
+// check if registration number already exists in table
+$sql = "SELECT * FROM elective_preference WHERE studentRegno = '$regno'";
+$result = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($result) == 0) {
+    // registration number does not exist, insert new record
+    $sql_insert = "INSERT INTO elective_preference (studentRegno, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11, E12, E13, E14, E15, E16, E17, E18, E19) 
+    VALUES ('$regno', '".($selected_val[0] ? $selected_val[0] : "NULL")."', '".($selected_val[1] ? $selected_val[1] : "NULL")."', '".($selected_val[2] ? $selected_val[2] : "NULL")."', '".($selected_val[3] ? $selected_val[3] : "NULL")."', '".($selected_val[4] ? $selected_val[4] : "NULL")."', '".($selected_val[5] ? $selected_val[5] : "NULL")."',
+            '".($selected_val[6] ? $selected_val[6] : "NULL")."', '".($selected_val[7] ? $selected_val[7] : "NULL")."', '".($selected_val[8] ? $selected_val[8] : "NULL")."', '".($selected_val[9] ? $selected_val[9] : "NULL")."', '".($selected_val[10] ? $selected_val[10] : "NULL")."', '".($selected_val[11] ? $selected_val[11] : "NULL")."', '".($selected_val[12] ? $selected_val[12] : "NULL")."',
+            '".($selected_val[13] ? $selected_val[13] : "NULL")."', '".($selected_val[14] ? $selected_val[14] : "NULL")."', '".($selected_val[15] ? $selected_val[15] : "NULL")."', '".($selected_val[16] ? $selected_val[16] : "NULL")."', '".($selected_val[17] ? $selected_val[17] : "NULL")."', '".($selected_val[18] ? $selected_val[18] : "NULL")."')";
+    mysqli_query($con, $sql_insert);
+    
     echo '<script>alert("Elective Preference Uploaded Successfully");</script>';
+} else {
+    // registration number already exists, do nothing or update existing record
+    
+    echo '<script>alert("Data Already Exists");</script>';
+}
+
+
 }
 ?>
 
