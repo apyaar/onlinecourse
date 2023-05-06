@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 07:57 PM
+-- Generation Time: May 06, 2023 at 09:53 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -127,9 +127,10 @@ INSERT INTO `courseenrolls` (`id`, `studentRegno`, `pincode`, `session`, `depart
 
 CREATE TABLE `courses_allocated` (
   `courses_allocated_id` int(11) NOT NULL,
+  `student_reg_no` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `course_code` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `course_name` varchar(50) NOT NULL,
-  `student_reg_no` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+  `course_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -219,7 +220,16 @@ INSERT INTO `eligible_optional_core` (`id`, `stream_id`, `stream_name`, `courseN
 (29, 1, 'MCA', 'Social System'),
 (34, 1, 'MCA', 'ACN'),
 (37, 1, 'MCA', 'SP'),
-(38, 1, 'MCA', 'System Security');
+(38, 1, 'MCA', 'System Security'),
+(46, 7, 'IMTECH 7-8', 'CIP'),
+(47, 7, 'IMTECH 7-8', 'Data Compression'),
+(48, 7, 'IMTECH 7-8', 'DDPC'),
+(49, 7, 'IMTECH 7-8', 'DL'),
+(50, 7, 'IMTECH 7-8', 'EHFC'),
+(51, 7, 'IMTECH 7-8', 'Internet of Things'),
+(52, 7, 'IMTECH 7-8', 'Meta Heuristics'),
+(53, 7, 'IMTECH 7-8', 'System Security'),
+(54, 7, 'IMTECH 7-8', 'Virtualization');
 
 -- --------------------------------------------------------
 
@@ -364,7 +374,28 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`, `studentName`, `pincode`, `session`, `department`, `semester`, `cgpa`, `courses_allocated_id`, `enrolment_status`, `optional_core_choice_1`, `optional_core_choice_2`, `optional_core_choice_3`, `password_status`, `creationdate`, `updationDate`) VALUES
-('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'SM', 'Advance Algo', 'Virtualization', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM');
+('12356', 1, '', '123456', 'ayushi', '181793', NULL, NULL, NULL, '0.00', 0, 0, 'SM', 'Advance Algo', 'Virtualization', 1, '2023-04-02 09:58:10', '02-04-2023 04:22:17 PM'),
+('18MCME02', 7, NULL, '12345', 'Amruta Jandhyala', NULL, NULL, NULL, '8', '9.00', 0, 0, 'DDPC', 'Data Compression', 'NULL', 1, '2023-05-06 07:15:44', '06-05-2023 12:49:51 PM'),
+('18MCME03', 7, NULL, '12345', 'Arun Kumar Dharavath', NULL, NULL, NULL, '8', '9.60', 0, 0, 'Data Compression', 'System Security', 'NULL', 1, '2023-05-06 07:15:44', '06-05-2023 12:52:36 PM'),
+('18MCME04', 7, NULL, '12345', 'Gayathri G', NULL, NULL, NULL, '8', '9.50', 0, 0, 'Internet of Things', 'System Security', 'NULL', 1, '2023-05-06 07:15:44', '06-05-2023 12:54:48 PM'),
+('18MCME07', 7, NULL, '12345', 'Preethi Kajjayam', NULL, NULL, NULL, '8', '4.50', 0, 0, 'EHFC', 'CIP', 'NULL', 1, '2023-05-06 07:15:44', '06-05-2023 12:55:28 PM'),
+('18MCME09', 7, NULL, 'GiSuX', 'Challa Subramanyam', NULL, NULL, NULL, '8', '2.50', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME10', 7, NULL, 'OzEiX', 'K. Parikshit Rao', NULL, NULL, NULL, '8', '9.40', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME11', 7, NULL, 'LeQwY', 'P Sai Teja', NULL, NULL, NULL, '8', '6.80', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME13', 7, NULL, 'SlNpS', 'A.Pavan kumar', NULL, NULL, NULL, '8', '5.40', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME14', 7, NULL, 'JsGtB', 'Harshitha Bingi', NULL, NULL, NULL, '8', '2.10', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME15', 7, NULL, 'SoJpE', 'Mallu Rakesh Reddy', NULL, NULL, NULL, '8', '7.00', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME16', 7, NULL, 'KnEqH', 'Rohan', NULL, NULL, NULL, '8', '8.40', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME17', 7, NULL, 'YzLpQ', 'V. Sai Koushik', NULL, NULL, NULL, '8', '8.80', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME18', 7, NULL, 'KqSiE', 'K. Roopa Yashaswini', NULL, NULL, NULL, '8', '6.00', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('18MCME19', 7, NULL, 'WiQyY', 'Chinthakindi Tarun', NULL, NULL, NULL, '8', '7.60', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI05', 2, NULL, 'TdAqO', 'Ch Saiman Naidu', NULL, NULL, NULL, '4', '5.70', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI09', 2, NULL, 'KwAeY', 'Sai Sanjana Madaram', NULL, NULL, NULL, '4', '8.20', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI14', 2, NULL, 'XmOsW', 'Rajesh Thalla', NULL, NULL, NULL, '4', '6.50', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI16', 2, NULL, 'IhNbO', 'R P Yashasvi', NULL, NULL, NULL, '4', '9.10', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI18', 2, NULL, 'LxGlC', 'Dipyaman Mukhopadhyay', NULL, NULL, NULL, '4', '10.00', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI20', 2, NULL, 'OgAfQ', 'Drishty gupta', NULL, NULL, NULL, '4', '5.80', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL),
+('21MCMI25', 2, NULL, 'KvJvC', 'Pralhad Kolambkar', NULL, NULL, NULL, '4', '9.90', 0, 0, NULL, NULL, NULL, 0, '2023-05-06 07:15:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -438,7 +469,12 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (50, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 16:13:02', '26-04-2023 11:25:14 PM', 1),
 (51, '12356', 0x3a3a3100000000000000000000000000, '2023-04-26 18:00:47', NULL, 1),
 (52, '12356', 0x3a3a3100000000000000000000000000, '2023-04-29 17:47:37', NULL, 1),
-(53, '12356', 0x3a3a3100000000000000000000000000, '2023-04-30 17:07:53', NULL, 1);
+(53, '12356', 0x3a3a3100000000000000000000000000, '2023-04-30 17:07:53', NULL, 1),
+(54, '18MCME02', 0x3a3a3100000000000000000000000000, '2023-05-06 07:19:39', '06-05-2023 12:50:27 PM', 1),
+(55, '18MCME02', 0x3a3a3100000000000000000000000000, '2023-05-06 07:21:05', '06-05-2023 12:52:19 PM', 1),
+(56, '18MCME03', 0x3a3a3100000000000000000000000000, '2023-05-06 07:22:28', '06-05-2023 12:53:51 PM', 1),
+(57, '18MCME04', 0x3a3a3100000000000000000000000000, '2023-05-06 07:24:35', '06-05-2023 12:55:03 PM', 1),
+(58, '18MCME07', 0x3a3a3100000000000000000000000000, '2023-05-06 07:25:19', '06-05-2023 12:55:51 PM', 1);
 
 --
 -- Indexes for dumped tables
@@ -570,7 +606,7 @@ ALTER TABLE `elective_preference`
 -- AUTO_INCREMENT for table `eligible_optional_core`
 --
 ALTER TABLE `eligible_optional_core`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -606,7 +642,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

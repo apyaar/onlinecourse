@@ -13,6 +13,7 @@
                                <li><a href="manage-students.php">Manage Students</a></li>
                                <li><a href="eligible-optional-core.php">Choose Eligible Optional Core</a></li>
                                <li><a href="enroll-history.php">Enroll History</a></li>
+                               <li><a href="allocation.php">Allocate Courses</a></li>
                                <li><a href="user-log.php">Student Logs </a></li>
                                 <li><a href="news.php">News </a></li>
                                 <li><a href="change-password.php">Change Password </a></li>
