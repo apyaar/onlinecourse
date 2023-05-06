@@ -10,21 +10,67 @@ else{
 
 if(isset($_POST['submit']))
 {
-    var_dump($_POST);
+    // var_dump($_POST);
  
     $sql = mysqli_query($con, "SELECT studentRegno, optional_core_choice_1, optional_core_choice_2, optional_core_choice_3,enrolment_status 
     FROM students
     WHERE stream_id = '".$_POST['stream_idx']."' AND (optional_core_choice_1 IS NOT NULL OR optional_core_choice_2 IS NOT NULL OR optional_core_choice_3 IS NOT NULL) AND enrolment_status=0
     ORDER BY cgpa DESC;");
-   
-   
-    while( $row=mysqli_fetch_array($sql)){
-        var_dump($row); 
-        $sql1=mysqli_query($con,"Insert into courses_allocated ()")
+   $row=mysqli_fetch_array($sql);
+
+  echo $row['optional_core_choice_3']!=="NULL";
+
+        if($row['optional_core_choice_1']!=="NULL"){
+        $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
+        SELECT 
+            '".$row['studentRegno']."',
+            (SELECT course_code FROM course WHERE courseName = '".$row['optional_core_choice_1']."'),
+            '".$row['optional_core_choice_1']."',
+            'optional_Core'
+        WHERE '".$row['optional_core_choice_1']."' IS NOT NULL;
+        ";
+        mysqli_query($con,$sql1);
     }
-    // echo "Selected courses have been saved.";
-    
+
+
+        if($row['optional_core_choice_2']!=="NULL"){
+            $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
+        SELECT 
+            '".$row['studentRegno']."',
+            (SELECT course_code FROM course WHERE courseName = '".$row['optional_core_choice_2']."'),
+            '".$row['optional_core_choice_2']."',
+            'optional_Core'
+        WHERE '".$row['optional_core_choice_2']."' IS NOT NULL;
+        ";
+        mysqli_query($con,$sql1);
+        }
+        
+
+        if($row['optional_core_choice_3']!=="NULL"){
+        $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
+        SELECT 
+            '".$row['studentRegno']."',
+            (SELECT course_code FROM course WHERE courseName = '".$row['optional_core_choice_3']."'),
+            '".$row['optional_core_choice_3']."',
+            'optional_Core'
+        WHERE '".$row['optional_core_choice_3']."' IS NOT NULL;
+        ";
+        mysqli_query($con,$sql1);
+        }
+
+        $sql1="DELETE FROM courses_allocated 
+       WHERE courses_allocated_id NOT IN (
+            SELECT MIN(courses_allocated_id)
+            FROM courses_allocated
+            GROUP BY student_reg_no, course_code
+       )";
+       mysqli_query($con,$sql1);
+
+       echo '<script>alert("Optional cores allocated.")</script>';
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
