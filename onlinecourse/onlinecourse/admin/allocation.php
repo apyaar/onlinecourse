@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
     FROM students
     WHERE stream_id = '".$_POST['stream_idx']."' AND (optional_core_choice_1 IS NOT NULL OR optional_core_choice_2 IS NOT NULL OR optional_core_choice_3 IS NOT NULL) AND enrolment_status_optional=0
     ORDER BY cgpa DESC;");
-   $row=mysqli_fetch_array($sql);
+while($row=mysqli_fetch_array($sql)){
 
 //    var_dump($row);
 
@@ -71,11 +71,12 @@ if(isset($_POST['submit']))
        mysqli_query($con,$sql1);
        
 
-//updating the status of that student that is enrolled
-    //    $sql1= "UPDATE students
-    //    SET enrolment_status_optional=1
-    //    WHERE studentRegno='".$row['studentRegno']."'; ";
-    //    mysqli_query($con,$sql1);
+// updating the status of that student that is enrolled
+       $sql1= "UPDATE students
+       SET enrolment_status_optional=1
+       WHERE studentRegno='".$row['studentRegno']."'; ";
+       mysqli_query($con,$sql1);
+}
 
        echo '<script>alert("Optional cores allocated.")</script>';
       
