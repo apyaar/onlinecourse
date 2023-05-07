@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 07:10 PM
+-- Generation Time: May 07, 2023 at 07:14 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -418,6 +418,43 @@ INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `total_no_of_seats`
+--
+
+CREATE TABLE `total_no_of_seats` (
+  `stream_id` int(255) NOT NULL,
+  `stream_name` varchar(255) NOT NULL,
+  `System Security` int(255) DEFAULT NULL,
+  `Cloud Computing` int(255) DEFAULT NULL,
+  `Machine Learning` int(255) DEFAULT NULL,
+  `Network Security` int(255) DEFAULT NULL,
+  `Virtualization` int(255) DEFAULT NULL,
+  `Advance Algo` int(255) DEFAULT NULL,
+  `Internet of Things` int(255) DEFAULT NULL,
+  `SP` int(255) DEFAULT NULL,
+  `Data Compression` int(255) DEFAULT NULL,
+  `Meta Heuristics` int(255) DEFAULT NULL,
+  `EHFC` int(255) DEFAULT NULL,
+  `DDPC` int(255) DEFAULT NULL,
+  `DL` int(255) DEFAULT NULL,
+  `Biometrics` int(255) DEFAULT NULL,
+  `SM` int(255) DEFAULT NULL,
+  `CIP` int(255) DEFAULT NULL,
+  `ACN` int(255) DEFAULT NULL,
+  `SNA` int(255) DEFAULT NULL,
+  `Social System` int(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `total_no_of_seats`
+--
+
+INSERT INTO `total_no_of_seats` (`stream_id`, `stream_name`, `System Security`, `Cloud Computing`, `Machine Learning`, `Network Security`, `Virtualization`, `Advance Algo`, `Internet of Things`, `SP`, `Data Compression`, `Meta Heuristics`, `EHFC`, `DDPC`, `DL`, `Biometrics`, `SM`, `CIP`, `ACN`, `SNA`, `Social System`) VALUES
+(1, 'MCA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userlog`
 --
 
@@ -584,6 +621,12 @@ ALTER TABLE `students`
   ADD KEY `stream_id` (`stream_id`);
 
 --
+-- Indexes for table `total_no_of_seats`
+--
+ALTER TABLE `total_no_of_seats`
+  ADD KEY `stream_id` (`stream_id`);
+
+--
 -- Indexes for table `userlog`
 --
 ALTER TABLE `userlog`
@@ -688,6 +731,12 @@ ALTER TABLE `eligible_optional_core`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`stream_id`) REFERENCES `stream` (`stream_id`);
+
+--
+-- Constraints for table `total_no_of_seats`
+--
+ALTER TABLE `total_no_of_seats`
+  ADD CONSTRAINT `total_no_of_seats_ibfk_1` FOREIGN KEY (`stream_id`) REFERENCES `stream` (`stream_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
