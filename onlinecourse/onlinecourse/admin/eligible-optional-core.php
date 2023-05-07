@@ -34,9 +34,8 @@ if(isset($_POST['submit']))
     )";
         mysqli_query($con, $sql);
 
+        echo '<script>alert("Selected courses have been saved.")</script>';
 
-    echo "Selected courses have been saved.";
-    
 }
 ?>
 
