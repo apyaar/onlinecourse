@@ -87,34 +87,54 @@ if(isset($_POST['submitElective']))
 
     $sql=mysqli_query($con,"SELECT * FROM students JOIN elective_preference ON students.studentRegno = elective_preference.studentRegno WHERE students.stream_id = '".$_POST['stream_idx']."' AND students.enrolment_status_elective = 0
     ORDER BY students.cgpa DESC;");
-    $row=mysqli_fetch_array($sql);
+$row=mysqli_fetch_array($sql);
 
-    if($row['E1']!=="NULL"){
+$sql0=mysqli_query($con, "select * from total_no_of_seats where stream_id='".$_POST['stream_idx']."'");
+$row0=mysqli_fetch_array($sql0);
+// var_dump ($row);
 
-        //updating the seats for that course for particular stream
-        // $sql2="UPDATE courses set ".$row['strea']."=MCA+1 where "
+// for ($i = 1; $i <= 19; $i++) {
+//     $col_name = 'E'.$i;
+//     $temp=$row[$col_name];
+//     echo($temp);
+//     echo ($row0[$temp]." ");
+// }
 
+for ($i = 1; $i <= 19; $i++) {
+    $col_name = 'E'.$i;
+    $temp=$row[$col_name];
+    // echo($temp." ");
+    if($row[$col_name]!="NULL" && $row0[$temp]>=1){
+       
         $sql1="INSERT INTO courses_allocated (student_reg_no, course_code, course_name, course_type)
         SELECT 
             '".$row['studentRegno']."',
-            (SELECT course_code FROM course WHERE courseName = '".$row['E1']."'),
-            '".$row['E1']."',
+            (SELECT course_code FROM course WHERE courseName = '".$row[$col_name]."'),
+            '".$row[$col_name]."',
             'Elective'
-        WHERE '".$row['E1']."' IS NOT NULL;";
+        WHERE '".$row[$col_name]."' IS NOT NULL;";
         mysqli_query($con,$sql1);
-        }
+        echo($temp." ");
+
+        //here is the error 
+        // $sql2="UPDATE total_no_of_seats SET $temp=$temp-1 where stream_id='".$_POST['stream_idx']."'" ;
+        // mysqli_query($con,$sql2);
+        
+    }
+//    else {$i++;}
+}
 
 
     //this is for removing duplicate values if the submit button is clicked more than once
-    $sql1="DELETE FROM courses_allocated 
+    $sqln="DELETE FROM courses_allocated 
     WHERE courses_allocated_id NOT IN (
          SELECT MIN(courses_allocated_id)
          FROM courses_allocated
          GROUP BY student_reg_no, course_code
     )";
-    mysqli_query($con,$sql1);
+    mysqli_query($con,$sqln);
     
-    var_dump($row);
+    // var_dump($row);
 }
 
 ?>

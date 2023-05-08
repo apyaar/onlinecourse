@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 07:14 PM
+-- Generation Time: May 08, 2023 at 12:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -132,21 +132,6 @@ CREATE TABLE `courses_allocated` (
   `course_name` varchar(50) NOT NULL,
   `course_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses_allocated`
---
-
-INSERT INTO `courses_allocated` (`courses_allocated_id`, `student_reg_no`, `course_code`, `course_name`, `course_type`) VALUES
-(122, '18MCME03', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(123, '18MCME03', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(124, '18MCME04', 'IoT – NKS', 'Internet of Things', 'optional_Core'),
-(125, '18MCME04', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(126, '18MCME02', 'DDPC-SNS', 'DDPC', 'optional_Core'),
-(127, '18MCME02', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(128, '18MCME07', 'EHCF – DP', 'EHFC', 'optional_Core'),
-(129, '18MCME07', 'CIP – CB', 'CIP', 'optional_Core'),
-(130, '18MCME03', 'DDPC-SNS', 'DDPC', 'Elective');
 
 -- --------------------------------------------------------
 
@@ -450,7 +435,12 @@ CREATE TABLE `total_no_of_seats` (
 --
 
 INSERT INTO `total_no_of_seats` (`stream_id`, `stream_name`, `System Security`, `Cloud Computing`, `Machine Learning`, `Network Security`, `Virtualization`, `Advance Algo`, `Internet of Things`, `SP`, `Data Compression`, `Meta Heuristics`, `EHFC`, `DDPC`, `DL`, `Biometrics`, `SM`, `CIP`, `ACN`, `SNA`, `Social System`) VALUES
-(1, 'MCA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'MCA', 0, 8, 0, 0, 0, 0, 10, 0, 50, 0, 0, 0, 0, 0, 0, 5, 0, 0, 50),
+(2, 'MTECH-AI', 50, 5, 50, 50, 50, 50, 5, 0, 50, 50, 50, 50, 50, 0, 0, 5, 50, 50, 50),
+(3, 'MTECH-CS', 50, 50, 0, 50, 50, 50, 15, 0, 50, 50, 50, 50, 50, 0, 0, 15, 50, 50, 50),
+(4, 'MTECH_IT', 50, 0, 0, 50, 50, 50, 5, 0, 50, 50, 50, 50, 50, 0, 0, 5, 50, 50, 50),
+(6, 'IMTECH 5-6', 50, 5, 0, 50, 50, 50, 0, 0, 50, 50, 50, 50, 0, 0, 0, 5, 50, 50, 50),
+(7, 'IMTECH 7-8', 50, 5, 0, 50, 50, 50, 15, 0, 50, 50, 50, 50, 50, 0, 50, 15, 50, 50, 50);
 
 -- --------------------------------------------------------
 
@@ -624,6 +614,7 @@ ALTER TABLE `students`
 -- Indexes for table `total_no_of_seats`
 --
 ALTER TABLE `total_no_of_seats`
+  ADD PRIMARY KEY (`stream_id`),
   ADD KEY `stream_id` (`stream_id`);
 
 --
@@ -652,7 +643,7 @@ ALTER TABLE `courseenrolls`
 -- AUTO_INCREMENT for table `courses_allocated`
 --
 ALTER TABLE `courses_allocated`
-  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=608;
 
 --
 -- AUTO_INCREMENT for table `department`
