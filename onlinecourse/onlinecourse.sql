@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 07:02 PM
+-- Generation Time: May 08, 2023 at 12:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -132,21 +132,6 @@ CREATE TABLE `courses_allocated` (
   `course_name` varchar(50) NOT NULL,
   `course_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses_allocated`
---
-
-INSERT INTO `courses_allocated` (`courses_allocated_id`, `student_reg_no`, `course_code`, `course_name`, `course_type`) VALUES
-(122, '18MCME03', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(123, '18MCME03', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(124, '18MCME04', 'IoT – NKS', 'Internet of Things', 'optional_Core'),
-(125, '18MCME04', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(126, '18MCME02', 'DDPC-SNS', 'DDPC', 'optional_Core'),
-(127, '18MCME02', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(128, '18MCME07', 'EHCF – DP', 'EHFC', 'optional_Core'),
-(129, '18MCME07', 'CIP – CB', 'CIP', 'optional_Core'),
-(130, '18MCME03', 'DDPC-SNS', 'DDPC', 'Elective');
 
 -- --------------------------------------------------------
 
@@ -418,6 +403,48 @@ INSERT INTO `students` (`studentRegno`, `stream_id`, `studentPhoto`, `password`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `total_no_of_seats`
+--
+
+CREATE TABLE `total_no_of_seats` (
+  `stream_id` int(255) NOT NULL,
+  `stream_name` varchar(255) NOT NULL,
+  `System Security` int(255) DEFAULT NULL,
+  `Cloud Computing` int(255) DEFAULT NULL,
+  `Machine Learning` int(255) DEFAULT NULL,
+  `Network Security` int(255) DEFAULT NULL,
+  `Virtualization` int(255) DEFAULT NULL,
+  `Advance Algo` int(255) DEFAULT NULL,
+  `Internet of Things` int(255) DEFAULT NULL,
+  `SP` int(255) DEFAULT NULL,
+  `Data Compression` int(255) DEFAULT NULL,
+  `Meta Heuristics` int(255) DEFAULT NULL,
+  `EHFC` int(255) DEFAULT NULL,
+  `DDPC` int(255) DEFAULT NULL,
+  `DL` int(255) DEFAULT NULL,
+  `Biometrics` int(255) DEFAULT NULL,
+  `SM` int(255) DEFAULT NULL,
+  `CIP` int(255) DEFAULT NULL,
+  `ACN` int(255) DEFAULT NULL,
+  `SNA` int(255) DEFAULT NULL,
+  `Social System` int(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `total_no_of_seats`
+--
+
+INSERT INTO `total_no_of_seats` (`stream_id`, `stream_name`, `System Security`, `Cloud Computing`, `Machine Learning`, `Network Security`, `Virtualization`, `Advance Algo`, `Internet of Things`, `SP`, `Data Compression`, `Meta Heuristics`, `EHFC`, `DDPC`, `DL`, `Biometrics`, `SM`, `CIP`, `ACN`, `SNA`, `Social System`) VALUES
+(1, 'MCA', 0, 8, 0, 0, 0, 0, 10, 0, 50, 0, 0, 0, 0, 0, 0, 5, 0, 0, 50),
+(2, 'MTECH-AI', 50, 5, 50, 50, 50, 50, 5, 0, 50, 50, 50, 50, 50, 0, 0, 5, 50, 50, 50),
+(3, 'MTECH-CS', 50, 50, 0, 50, 50, 50, 15, 0, 50, 50, 50, 50, 50, 0, 0, 15, 50, 50, 50),
+(4, 'MTECH_IT', 50, 0, 0, 50, 50, 50, 5, 0, 50, 50, 50, 50, 50, 0, 0, 5, 50, 50, 50),
+(6, 'IMTECH 5-6', 50, 5, 0, 50, 50, 50, 0, 0, 50, 50, 50, 50, 0, 0, 0, 5, 50, 50, 50),
+(7, 'IMTECH 7-8', 50, 5, 0, 50, 50, 50, 15, 0, 50, 50, 50, 50, 50, 0, 50, 15, 50, 50, 50);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userlog`
 --
 
@@ -584,6 +611,13 @@ ALTER TABLE `students`
   ADD KEY `stream_id` (`stream_id`);
 
 --
+-- Indexes for table `total_no_of_seats`
+--
+ALTER TABLE `total_no_of_seats`
+  ADD PRIMARY KEY (`stream_id`),
+  ADD KEY `stream_id` (`stream_id`);
+
+--
 -- Indexes for table `userlog`
 --
 ALTER TABLE `userlog`
@@ -609,7 +643,7 @@ ALTER TABLE `courseenrolls`
 -- AUTO_INCREMENT for table `courses_allocated`
 --
 ALTER TABLE `courses_allocated`
-  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=608;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -688,6 +722,12 @@ ALTER TABLE `eligible_optional_core`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`stream_id`) REFERENCES `stream` (`stream_id`);
+
+--
+-- Constraints for table `total_no_of_seats`
+--
+ALTER TABLE `total_no_of_seats`
+  ADD CONSTRAINT `total_no_of_seats_ibfk_1` FOREIGN KEY (`stream_id`) REFERENCES `stream` (`stream_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
