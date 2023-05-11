@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2023 at 07:25 PM
+-- Generation Time: May 11, 2023 at 09:40 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -138,23 +138,21 @@ CREATE TABLE `courses_allocated` (
 --
 
 INSERT INTO `courses_allocated` (`courses_allocated_id`, `student_reg_no`, `course_code`, `course_name`, `course_type`) VALUES
-(190, '18MCME03', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(191, '18MCME03', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(192, '18MCME04', 'IoT – NKS', 'Internet of Things', 'optional_Core'),
-(193, '18MCME04', 'SysSec-BMM*', 'System Security', 'optional_Core'),
-(194, '18MCME02', 'DDPC-SNS', 'DDPC', 'optional_Core'),
-(195, '18MCME02', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
-(196, '18MCME07', 'EHCF – DP', 'EHFC', 'optional_Core'),
-(197, '18MCME07', 'CIP – CB', 'CIP', 'optional_Core'),
-(198, '18MCME03', 'DDPC-SNS', 'DDPC', 'Elective'),
-(199, '18MCME03', 'NWSec – WN', 'Network Security', 'Elective'),
-(200, '18MCME03', 'SNA – SDB', 'SNA', 'Elective'),
-(201, '18MCME04', 'CIP – CB', 'CIP', 'Elective'),
-(202, '18MCME04', 'Virtualization- PSK *', 'Virtualization', 'Elective'),
-(203, '18MCME04', 'EHCF – DP', 'EHFC', 'Elective'),
-(204, '18MCME02', 'Virtualization- PSK *', 'Virtualization', 'Elective'),
-(205, '18MCME02', 'Meta Heuristics – AS', 'Meta Heuristics', 'Elective'),
-(206, '18MCME02', 'CIP – CB', 'CIP', 'Elective');
+(207, '18MCME03', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
+(208, '18MCME03', 'SysSec-BMM*', 'System Security', 'optional_Core'),
+(209, '18MCME04', 'IoT – NKS', 'Internet of Things', 'optional_Core'),
+(210, '18MCME04', 'SysSec-BMM*', 'System Security', 'optional_Core'),
+(211, '18MCME02', 'DDPC-SNS', 'DDPC', 'optional_Core'),
+(212, '18MCME02', 'Data Comp – VCV', 'Data Compression', 'optional_Core'),
+(213, '18MCME03', 'DDPC-SNS', 'DDPC', 'Elective'),
+(214, '18MCME03', 'NWSec – WN', 'Network Security', 'Elective'),
+(215, '18MCME03', 'SNA – SDB', 'SNA', 'Elective'),
+(216, '18MCME04', 'CIP – CB', 'CIP', 'Elective'),
+(217, '18MCME04', 'Virtualization- PSK *', 'Virtualization', 'Elective'),
+(218, '18MCME04', 'EHCF – DP', 'EHFC', 'Elective'),
+(219, '18MCME02', 'Virtualization- PSK *', 'Virtualization', 'Elective'),
+(220, '18MCME02', 'Meta Heuristics – AS', 'Meta Heuristics', 'Elective'),
+(221, '18MCME02', 'CIP – CB', 'CIP', 'Elective');
 
 -- --------------------------------------------------------
 
@@ -463,7 +461,7 @@ INSERT INTO `total_no_of_seats` (`stream_id`, `stream_name`, `System Security`, 
 (3, 'MTECH-CS', 50, 50, 0, 50, 50, 50, 15, 0, 50, 50, 50, 50, 50, 0, 0, 15, 50, 50, 50),
 (4, 'MTECH_IT', 50, 0, 0, 50, 50, 50, 5, 0, 50, 50, 50, 50, 50, 0, 0, 5, 50, 50, 50),
 (6, 'IMTECH 5-6', 50, 5, 0, 50, 50, 50, 0, 0, 50, 50, 50, 50, 0, 0, 0, 5, 50, 50, 50),
-(7, 'IMTECH 7-8', 29, 17, 39, 26, 3, -1, 41, 28, 46, 14, 15, 14, 0, 33, -8029, 6, 28, 17, 28);
+(7, 'IMTECH 7-8', 29, 17, 39, 25, 1, -1, 41, 28, 46, 13, 14, 13, 0, 33, -8029, 4, 28, 16, 28);
 
 -- --------------------------------------------------------
 
@@ -545,7 +543,8 @@ INSERT INTO `userlog` (`id`, `studentRegno`, `userip`, `loginTime`, `logout`, `s
 (58, '18MCME07', 0x3a3a3100000000000000000000000000, '2023-05-06 07:25:19', '06-05-2023 12:55:51 PM', 1),
 (59, '18MCME02', 0x3a3a3100000000000000000000000000, '2023-05-06 16:52:03', '06-05-2023 10:39:53 PM', 1),
 (60, '18MCME03', 0x3a3a3100000000000000000000000000, '2023-05-06 17:09:59', '06-05-2023 10:40:52 PM', 1),
-(61, '18MCME04', 0x3a3a3100000000000000000000000000, '2023-05-06 17:11:03', NULL, 1);
+(61, '18MCME04', 0x3a3a3100000000000000000000000000, '2023-05-06 17:11:03', NULL, 1),
+(62, '12356', 0x3a3a3100000000000000000000000000, '2023-05-11 06:18:15', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -666,7 +665,7 @@ ALTER TABLE `courseenrolls`
 -- AUTO_INCREMENT for table `courses_allocated`
 --
 ALTER TABLE `courses_allocated`
-  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `courses_allocated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -720,7 +719,7 @@ ALTER TABLE `stream`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables
