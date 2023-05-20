@@ -9,7 +9,7 @@ else{
 
 if(isset($_POST['submit1']))
 {
-  
+
   header('Location: coursewise.php');
 	exit();
 }
@@ -71,7 +71,7 @@ if(isset($_POST['submit2']))
                             </div>
                             </div>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -105,4 +105,3 @@ error:function (){}
 </body>
 </html>
 <?php } ?>
-

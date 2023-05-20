@@ -40,7 +40,8 @@ error_reporting(0);
             </div>
 
             <div class="left-div">
-                <i class="fa fa-user-plus login-icon" ></i>
+                <i class="fa f login-icon" ></i>
+                <!-- <i class=.fa-user-plus:before ></i> -->
         </div>
             </div>
         </div>

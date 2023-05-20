@@ -1777,8 +1777,11 @@
 .fa-server:before {
   content: "\f233";
 }
-.fa-user-plus:before {
+/* .fa-user-plus:before {
   content: "\f234";
+} */
+.fa-user-plus:before {
+  content: url(C:\xampp\htdocs\onlinecourse2\onlinecourse\onlinecourse\assets\img\logo.png);
 }
 .fa-user-times:before {
   content: "\f235";

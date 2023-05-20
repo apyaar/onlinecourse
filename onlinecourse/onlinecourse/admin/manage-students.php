@@ -35,7 +35,7 @@ echo '<script>window.location.href=manage-students.php</script>';
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin | Course</title>
+    <title>Admin | Students</title>
     <link href="../assets/css/bootstrap.css" rel="stylesheet" />
     <link href="../assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
@@ -54,7 +54,7 @@ echo '<script>window.location.href=manage-students.php</script>';
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Course  </h1>
+                        <h1 class="page-head-line">Students </h1>
                     </div>
                 </div>
                 <div class="row" >
@@ -64,7 +64,7 @@ echo '<script>window.location.href=manage-students.php</script>';
                     <!--    Bordered Table  -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Manage Course
+                            Manage Students
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
